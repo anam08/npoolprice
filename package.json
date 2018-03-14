@@ -1,0 +1,7 @@
+{
+  "name": "npoolprice",
+  "version": "0.0.4",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
