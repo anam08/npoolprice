@@ -4,7 +4,8 @@ var pair = {
     'BBS-BTC' : 'crex24',
     'BTC-USD' : 'crex24',
     'IPBC-BTC' : 'crex24',
-    'BKC-BTC' : 'cryptohub'
+    'BKC-BTC' : 'cryptohub',
+    'PLURA-BTC' : 'tradeorge'
 }
 
 module.exports = {
