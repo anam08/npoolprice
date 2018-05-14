@@ -7,9 +7,10 @@ var pair = {
     'BKC-BTC' : 'cryptohub',
     'SPES-BTC' : 'cryptohub',
     'PLURA-BTC' : 'tradeorge',
-    'RTO-BTC' : 'octaex',
-    'QWC-BTC' : 'octaex',
-    'SUM-BTC' : 'octaex'
+    'RTO-BTC' : 'tradeorge',
+    'QWC-BTC' : 'crex24',
+    'SUM-BTC' : 'octaex',
+    'TRIT-BTC' : 'altex'
 }
 
 module.exports = {
