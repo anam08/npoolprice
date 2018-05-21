@@ -6,6 +6,8 @@ var pair = {
     'IPBC-BTC' : 'crex24',
     'BKC-BTC' : 'cryptohub',
     'SPES-BTC' : 'cryptohub',
+    'VIOG-BTC' : 'cryptohub',
+    'RAPID-BTC' : 'cryptohub',
     'PLURA-BTC' : 'tradeorge',
     'RTO-BTC' : 'tradeorge',
     'QWC-BTC' : 'crex24',
