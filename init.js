@@ -72,6 +72,17 @@ var server = http.createServer(function(request, response)
     }
 });
 
+function writeResp(resp, data, pair){
+    respJSON = JSON.stringify(data);
+    response.writeHead("200", {
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json',
+        'Content-Length': respJSON.length
+    });
+    response.end(respJSON);
+}
+
 server.listen(port, function(err){
     if (err)
     {
