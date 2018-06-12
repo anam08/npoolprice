@@ -7,8 +7,6 @@ const port = process.env.PORT || 9026;
 var coin = require('./coin.js');
 var pair = coin.Pair();
 
-var prices = {};
-
 var server = http.createServer(function(request, response)
 {
     if(typeof(request.headers.origin)!='undefined')
@@ -44,15 +42,24 @@ var server = http.createServer(function(request, response)
     var pairPart = (urlParts.pathname).replace('/', '');
     if(typeof(pair[pairPart])!='undefined')
     {
-        if(prices[pairPart] && prices[pairPart]['timestamp']<=Math.round(Date.now()/1000)+300)
+        var market = require('./lib/market.js');
+        var price = market['getPrice'](pairPart);
+        
+        if(price && price['timestamp']<=Math.round(Date.now()/1000)+300)
         {
-            writeResp(response, prices[pairPart], pairPart)
+            respJSON = JSON.stringify(prices[pairPart]);
+            response.writeHead("200", {
+                'Access-Control-Allow-Origin': '*',
+                'Cache-Control': 'no-cache',
+                'Content-Type': 'application/json',
+                'Content-Length': respJSON.length
+                });
+            response.end(respJSON);
         }
         else
         {
             var func = 'handle'+pair[pairPart];
-            var market = require('./lib/market.js');
-            market[func](pairPart, response, 'writeResp');
+            market[func](pairPart, response);
         }
     }
     else
@@ -64,18 +71,6 @@ var server = http.createServer(function(request, response)
         response.end(JSON.stringify({error: 'Invalid pair call'}));
     }
 });
-
-function writeResp(resp, data, pair){
-    resp[pair] = data;
-    respJSON = JSON.stringify(data);
-    response.writeHead("200", {
-        'Access-Control-Allow-Origin': allowedOrigin,
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json',
-        'Content-Length': respJSON.length
-    });
-    response.end(respJSON);
-}
 
 server.listen(port, function(err){
     if (err)
