@@ -11,8 +11,8 @@ var pair = {
     'RAPID-BTC' : 'cryptohub',
     'PLURA-BTC' : 'tradeorge',
     'RTO-BTC' : 'tradeorge',
+    'LNS-BTC' : 'tradeorge',
     'QWC-BTC' : 'crex24',
-    'SUM-BTC' : 'octaex',
     'TRIT-BTC' : 'altex'
 }
 
