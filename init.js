@@ -63,7 +63,7 @@ var server = http.createServer(function(request, response)
             var func = 'handle'+pair[pairPart];
             market[func](pairPart, response);
             
-            console.log('Send price response from http(s) fetch data for pair'+pairPart);
+            console.log('Send price response from http(s) fetch data for pair '+pairPart);
         }
     }
     else
