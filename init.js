@@ -7,6 +7,8 @@ const port = process.env.PORT || 9026;
 var coin = require('./coin.js');
 var pair = coin.Pair();
 
+var prices = {};
+
 var server = http.createServer(function(request, response)
 {
     if(typeof(request.headers.origin)!='undefined')
@@ -42,9 +44,23 @@ var server = http.createServer(function(request, response)
     var pairPart = (urlParts.pathname).replace('/', '');
     if(typeof(pair[pairPart])!='undefined')
     {
-        var func = 'handle'+pair[pairPart];
-        var market = require('./lib/market.js');
-        market[func](pairPart, response);
+        if(prices[pairPart])
+        {
+            respJSON = JSON.stringify(prices[pairPart]);
+            response.writeHead("200", {
+                'Access-Control-Allow-Origin': '*',
+                'Cache-Control': 'no-cache',
+                'Content-Type': 'application/json',
+                'Content-Length': respJSON.length
+                });
+            response.end(respJSON);
+        }
+        else
+        {
+            var func = 'handle'+pair[pairPart];
+            var market = require('./lib/market.js');
+            market[func](pairPart, response);
+        }
     }
     else
     {
