@@ -45,7 +45,7 @@ var server = http.createServer(function(request, response)
         var market = require('./lib/market.js');
         var price = market['getPrice'](pairPart);
         
-        if(price && price['timestamp']>Math.round(Date.now()/1000)+300)
+        if(price && price['timestamp']+300>Math.round(Date.now()/1000))
         {
             respJSON = JSON.stringify(price);
             response.writeHead("200", {
