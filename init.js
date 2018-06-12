@@ -55,11 +55,15 @@ var server = http.createServer(function(request, response)
                 'Content-Length': respJSON.length
                 });
             response.end(respJSON);
+            
+            console.log('Send price response from memory for pair '+pairPart);
         }
         else
         {
             var func = 'handle'+pair[pairPart];
             market[func](pairPart, response);
+            
+            console.log('Send price response from http(s) fetch data for pair'+pairPart);
         }
     }
     else
