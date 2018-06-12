@@ -47,7 +47,7 @@ var server = http.createServer(function(request, response)
         
         if(price && price['timestamp']<=Math.round(Date.now()/1000)+300)
         {
-            respJSON = JSON.stringify(prices[pairPart]);
+            respJSON = JSON.stringify(price);
             response.writeHead("200", {
                 'Access-Control-Allow-Origin': '*',
                 'Cache-Control': 'no-cache',
