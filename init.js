@@ -44,7 +44,7 @@ var server = http.createServer(function(request, response)
     var pairPart = (urlParts.pathname).replace('/', '');
     if(typeof(pair[pairPart])!='undefined')
     {
-        if(prices[pairPart])
+        if(prices[pairPart] && prices[pairPart]['timestamp']<=Math.round(Date.now()/1000)+300)
         {
             respJSON = JSON.stringify(prices[pairPart]);
             response.writeHead("200", {
@@ -73,6 +73,7 @@ var server = http.createServer(function(request, response)
 });
 
 function writeResp(resp, data, pair){
+    resp[pair] = data;
     respJSON = JSON.stringify(data);
     response.writeHead("200", {
         'Access-Control-Allow-Origin': allowedOrigin,
