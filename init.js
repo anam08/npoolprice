@@ -46,20 +46,13 @@ var server = http.createServer(function(request, response)
     {
         if(prices[pairPart] && prices[pairPart]['timestamp']<=Math.round(Date.now()/1000)+300)
         {
-            respJSON = JSON.stringify(prices[pairPart]);
-            response.writeHead("200", {
-                'Access-Control-Allow-Origin': '*',
-                'Cache-Control': 'no-cache',
-                'Content-Type': 'application/json',
-                'Content-Length': respJSON.length
-                });
-            response.end(respJSON);
+            writeResp(response, prices[pairPart], pairPart)
         }
         else
         {
             var func = 'handle'+pair[pairPart];
             var market = require('./lib/market.js');
-            market[func](pairPart, response);
+            market[func](pairPart, response, 'writeResp');
         }
     }
     else
