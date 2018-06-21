@@ -13,7 +13,7 @@ var pair = {
     'RTO-BTC' : 'tradeorge',
     'LNS-BTC' : 'tradeorge',
     'QWC-BTC' : 'crex24',
-    'TRIT-BTC' : 'altex'
+    'TRIT-BTC' : 'tradeorge'
 }
 
 module.exports = {
